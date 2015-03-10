@@ -120,6 +120,29 @@ var $simpleNumberMask = (function(){
 
     return {
 
+      getValue: function (elementId) {
+        var elem = document.getElementById(elementId);
+
+        if(elem) {
+            return elem["@simple-number-mask-value"];
+        }
+
+        return null;
+      },
+
+      getNumber: function (elementId) {
+        var elem = document.getElementById(elementId);
+
+        if(elem) {
+            val = elem["@simple-number-mask-value"];
+            val = parseInt(val);
+            exp = parseInt(elem["@simple-number-mask"].decimal.size);
+            return val/Math.pow(10, exp);
+        }
+
+        return null;
+      },
+
       //Apply the mask to a field by selector
       apply: function(selector, config) {
         elems = document.querySelectorAll(selector);
