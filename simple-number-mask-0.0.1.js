@@ -1,7 +1,5 @@
 var $simpleNumberMask = (function(){
 
-  var inst;
-
   function init() {
 
     /*
@@ -24,77 +22,100 @@ var $simpleNumberMask = (function(){
       item.maxlength = config.decimal.size + config.integer.size + 2;
       item["@simple-number-mask-value"] = "";
 
-      item.onkeyup = function(self){
-        return function(event){
-
-          if(event.keyCode > 57 || event.keyCode < 48) {
-            if(event.keyCode==8) {
-              var orn = self["@simple-number-mask-value"];
-              orn = orn.substring(1);
-              self["@simple-number-mask-value"] = orn;
-            } else {
-              return;
-            }
-
+      function processKey(self, event) {
+        if(event.keyCode > 57 || event.keyCode < 48) {
+          if(event.keyCode==8) {
+            var orn = self["@simple-number-mask-value"];
+            orn = orn.substring(1);
+            self["@simple-number-mask-value"] = orn;
+          } else {
+            return false;
           }
 
-          var conf = self["@simple-number-mask"];
-          var origin = self["@simple-number-mask-value"];
+        }
 
-          if(origin.length >= (self.maxlength - 2)) {
-            return;
-          }
+        var conf = self["@simple-number-mask"];
+        var origin = self["@simple-number-mask-value"];
 
-          var output = "";
-
-          if(event.keyCode != 8) {
-            var ch = String.fromCharCode(event.keyCode);
-            origin += ch;
-          }
-
-          self["@simple-number-mask-value"] = origin;
-
-          var origintmp = origin;
-          var integr = 0;
-
-          while(origintmp.length < (conf.decimal.size + 1)) {
-            origintmp += "0";// I'm representating the number in reverse order like 00.000,1
-          }
-
-          //decimal
-          for(var id = 0; id < config.decimal.size; id++) {
-            output = origintmp.charAt(id) + output;
-          }
-
-          output = config.decimal.separator + output;
-
-          origintmp.trim();
-          //integer
-          for(var id = 2; id < origintmp.length; id++) {
-
-            if(integr == 3) {
-              output = config.integer.separator + output;
-              integr=0;
-            }
-            integr++;
-
-            output = origintmp.charAt(id) + output;
-          }
-
-          item.value = output;
-
+        if(origin.length >= (self.maxlength - 2)) {
           return false;
-        }//end function
-      }(item);
+        }
 
-      item.onkeydown = function(ev){
+        var output = "";
+
+        if(event.keyCode != 8) {
+          var ch = String.fromCharCode(event.keyCode);
+          origin += ch;
+        }
+
+        self["@simple-number-mask-value"] = origin;
+
+        var origintmp = origin;
+        var integr = 0;
+
+        while(origintmp.length < (conf.decimal.size + 1)) {
+          origintmp += "0";// I'm representating the number in reverse order like 00.000,1
+        }
+
+        //decimal
+        for(var id = 0; id < config.decimal.size; id++) {
+          output = origintmp.charAt(id) + output;
+        }
+
+        output = config.decimal.separator + output;
+
+        origintmp.trim();
+        //integer
+        for(var id = 2; id < origintmp.length; id++) {
+
+          if(integr == 3) {
+            output = config.integer.separator + output;
+            integr=0;
+          }
+          integr++;
+
+          output = origintmp.charAt(id) + output;
+        }
+
+        item.value = output;
+
+        item.setSelectionRange(item.value.length,item.value.length);
+
         return false;
       }
 
-    }
+      item.onkeyup = function(event){
+        this.setSelectionRange(this.value.length,this.value.length);
+        return false;
+      }
 
-    function applyMask() {
+      item.onkeydown = function(self){
+        return function(event){
+          this.setSelectionRange(this.value.length,this.value.length);
+          return processKey(self, event);
+        }
+      }(item);
 
+      item.onfocus = function (ev) {
+        this.setSelectionRange(this.value.length,this.value.length);
+        return false;
+      }
+
+      item.ondragend = function (ev) {
+        this.setSelectionRange(this.value.length,this.value.length);
+        return false;
+      }
+
+
+      item.onclick = function (ev) {
+        this.setSelectionRange(this.value.length,this.value.length);
+        return false;
+      }
+
+      item.onselect = function (ev) {
+        this.setSelectionRange(this.value.length,this.value.length);
+        return false;
+      }
     }
 
     return {

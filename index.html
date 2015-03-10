@@ -10,10 +10,17 @@
             $simpleNumberMask.apply(".simple-input");
           }
 
+          function teste() {
+            myed = document.getElementById("myinput");
+
+            myed.focus();
+            myed.setSelectionRange(myed.value.length,myed.value.length);
+          }
         </script>
 
     </head>
     <body onload="load();">
         <input type="text" id="myinput" class="simple-input">
+        <button onclick="teste();">focus</button>
     </body>
 </html>
