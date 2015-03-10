@@ -23,3 +23,7 @@
     //...
 
 ###For more usage examples look in the *index.html* file.
+
+##Installation
+
+      bower install simple-number-mask
