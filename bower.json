@@ -1,0 +1,24 @@
+{
+  "name": "simple-number-mask",
+  "version": "0.0.1",
+  "homepage": "https://github.com/avraamisvi/simplemasknumber",
+  "authors": [
+    "abraao.isvi <abraao.isvi@gmail.com>"
+  ],
+  "description": "It is a SIMPLE input mask.",
+  "main": "simple-number-mask-0.0.1.js",
+  "keywords": [
+    "mask",
+    "input",
+    "simple",
+    "number"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
