@@ -69,21 +69,8 @@ var $simpleNumberMask = (function(){
           origintmp = "0" + origintmp;
         }
 
-        //decimal
-        var idc = origintmp.length;
-        var maxtmp = config.decimal.size;
-        var cnt = 1;
-        while(cnt < maxtmp) {
-          idc--;
-          cnt++;
-          output = origintmp.charAt(idc) + output;
-        }
-
-        output = config.decimal.separator + output;
-
-        origintmp.trim();
         //integer
-        for(var id = config.decimal.size; id < origintmp.length; id++) {
+        for(var id = (origintmp.length - config.decimal.size)-1; id >= 0; id--) {
 
           if(integr == 3) {
             output = config.integer.separator + output;
@@ -91,8 +78,17 @@ var $simpleNumberMask = (function(){
           }
           integr++;
 
+          output = origintmp.charAt(id) + output;
+        }
+
+        output = output + config.decimal.separator;
+
+        //decimal
+        for(var id = (origintmp.length - config.decimal.size); id < origintmp.length; id++) {
           output += origintmp.charAt(id);
         }
+
+        origintmp.trim();
 
         item.value = output;
 
