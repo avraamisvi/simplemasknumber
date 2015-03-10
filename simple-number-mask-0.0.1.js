@@ -1,9 +1,9 @@
 /*
 	A simple input mask with basic features to mask a input field for number values.
-	
+
 	Author: Abraao Isvi.
 	Date: 05-10-2015
-	license: MIT 
+	license: MIT
 */
 var $simpleNumberMask = (function(){
 
@@ -30,6 +30,11 @@ var $simpleNumberMask = (function(){
       item["@simple-number-mask-value"] = "";
 
       function processKey(self, event) {
+
+        if(event.keyCode == 67 && event.ctrlKey) {
+          return true;
+        }
+
         if(event.keyCode > 57 || event.keyCode < 48) {
           if(event.keyCode==8) {
             var orn = self["@simple-number-mask-value"];
@@ -61,19 +66,24 @@ var $simpleNumberMask = (function(){
         var integr = 0;
 
         while(origintmp.length < (conf.decimal.size + 1)) {
-          origintmp += "0";// I'm representating the number in reverse order like 00.000,1
+          origintmp = "0" + origintmp;
         }
 
         //decimal
-        for(var id = 0; id < config.decimal.size; id++) {
-          output = origintmp.charAt(id) + output;
+        var idc = origintmp.length;
+        var maxtmp = config.decimal.size;
+        var cnt = 1;
+        while(cnt < maxtmp) {
+          idc--;
+          cnt++;
+          output = origintmp.charAt(idc) + output;
         }
 
         output = config.decimal.separator + output;
 
         origintmp.trim();
         //integer
-        for(var id = 2; id < origintmp.length; id++) {
+        for(var id = config.decimal.size; id < origintmp.length; id++) {
 
           if(integr == 3) {
             output = config.integer.separator + output;
@@ -81,7 +91,7 @@ var $simpleNumberMask = (function(){
           }
           integr++;
 
-          output = origintmp.charAt(id) + output;
+          output += origintmp.charAt(id);
         }
 
         item.value = output;
@@ -122,6 +132,11 @@ var $simpleNumberMask = (function(){
       item.onselect = function (ev) {
         this.setSelectionRange(this.value.length,this.value.length);
         return false;
+      }
+
+      item.oncopy = function (ev) {
+        this.setSelectionRange(0,this.value.length);
+        return true;
       }
     }
 
