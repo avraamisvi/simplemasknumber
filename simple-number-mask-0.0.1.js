@@ -1,3 +1,10 @@
+/*
+	A simple input mask with basic features to mask a input field for number values.
+	
+	Author: Abraao Isvi.
+	Date: 05-10-2015
+	license: MIT 
+*/
 var $simpleNumberMask = (function(){
 
   function init() {
