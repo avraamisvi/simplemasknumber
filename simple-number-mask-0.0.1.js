@@ -6,13 +6,7 @@ var $simpleNumberMask = (function(){
 
     /*
       Format configuration:
-
-        # - not fixed digit.
-        0 - fixed digit, start always with zero.
-        . - decimal separator.
-        , - thousands separator.
-
-        usage example:
+      Usage example:
 
           configure(itm, {decimal: {size:2, separator:","}, integer: {size:6, separator:"."} })
 
