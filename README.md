@@ -6,7 +6,7 @@
   The idea here is to be simple, so do not expect a lot of configuration options.
   The input will receive numbers from right to left, starting from the decimal.
 
-  this version is early ALPHA.
+  **this version is early ALPHA.**
 
 ##Usage:
 
