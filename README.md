@@ -6,6 +6,8 @@
   The idea here is to be simple, so do not expect a lot of configuration options.
   The input will receive numbers from right to left, starting from the decimal.
 
+  this version is early ALPHA.
+
 ##Usage:
 
     $simpleNumberMask.apply(".simple-input", {decimal: {size:2, separator:","}, integer: {size:6, separator:"."} });
