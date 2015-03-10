@@ -10,10 +10,20 @@
             $simpleNumberMask.apply(".simple-input");
           }
 
+          function showvalue() {
+            alert($simpleNumberMask.getValue("myinput"));
+          }
+
+          function shownumber() {
+            alert($simpleNumberMask.getNumber("myinput"));
+          }
         </script>
 
     </head>
     <body onload="load();">
         <input type="text" id="myinput" class="simple-input">
+
+        <button onclick="showvalue()">show value</button>
+        <button onclick="shownumber()">show number</button>
     </body>
 </html>
