@@ -22,7 +22,7 @@ var $simpleNumberMask = (function(){
     function configure(item, config) {
 
       if(!config) {
-        config = {decimal: {size:2, separator:","}, integer: {size:6, separator:"."} };
+        config = {decimal: {size:2, separator:"."}, integer: {size:6, separator:","} };
       }
 
       item.style["text-align"] = "right";
