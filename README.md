@@ -6,7 +6,15 @@
   The idea here is to be simple, so do not expect a lot of configuration options.
   The input will receive numbers from right to left, starting from the decimal.
 
-  **this version is early ALPHA.**
+  **This is an ALPHA version.**
+
+
+##Features
+
+  - content can be copied with ctrl+c.
+  - returns value as number.
+  - returns value as unmasked string.
+  - **SIMPLE** to understand.
 
 ##Usage:
 
