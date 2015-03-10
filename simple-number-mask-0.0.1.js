@@ -38,7 +38,7 @@ var $simpleNumberMask = (function(){
         if(event.keyCode > 57 || event.keyCode < 48) {
           if(event.keyCode==8) {
             var orn = self["@simple-number-mask-value"];
-            orn = orn.substring(1);
+            orn = orn.substring(0, orn.length-1);
             self["@simple-number-mask-value"] = orn;
           } else {
             return false;
