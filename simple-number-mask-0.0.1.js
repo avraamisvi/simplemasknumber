@@ -12,6 +12,10 @@ var $simpleNumberMask = (function(){
 
 	function formatValue(item, config) {
 	
+	      if(!config) {
+	        config = {decimal: {size:2, separator:"."}, integer: {size:6, separator:","} };
+	      }
+
 	      var origin = origin = item.value.replace(/\D/gi,"");
 	      var output = "";
 	      
