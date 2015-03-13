@@ -1,6 +1,6 @@
 /*
 	A simple input mask with basic features to mask a input field for number values.
-	
+
 	github: https://github.com/avraamisvi/simplemasknumber
 	Author: Abraao Isvi.
 	Date: 05-10-2015
@@ -11,23 +11,23 @@ var $simpleNumberMask = (function(){
 	function init() {
 
 	function formatValue(item, config) {
-	
+
 	      if(!config) {
 	        config = {decimal: {size:2, separator:"."}, integer: {size:6, separator:","} };
 	      }
 
 	      var origin = origin = item.value.replace(/\D/gi,"");
 	      var output = "";
-	      
+
 	      if(!origin) {
 	    	  origin = "";
 	      }
-	
+
 	      item["@simple-number-mask-value"] = origin;
-	
+
 	      var origintmp = origin;
 	      var integr = 0;
-	
+
 	      var origintmp = origin;
 	        var integr = 0;
 
@@ -60,7 +60,7 @@ var $simpleNumberMask = (function(){
 
         item.setSelectionRange(item.value.length,item.value.length);
 	}
-	  
+
     /*
       Format configuration:
       Usage example:
@@ -77,6 +77,7 @@ var $simpleNumberMask = (function(){
 	      }
 
 	      item.style["text-align"] = "right";
+				item.style.textAlign="right";
 	      item["@simple-number-mask"] = config;
 	      item.maxlength = config.decimal.size + config.integer.size + 2;
 	      //item["@simple-number-mask-value"] = "";
@@ -87,15 +88,12 @@ var $simpleNumberMask = (function(){
 	          return true;
 	        }
 
-	        if(event.keyCode > 57 || event.keyCode < 48) {
-	          if(event.keyCode==8) {
+					if(event.keyCode==8) {
 	            var orn = self["@simple-number-mask-value"];
 	            orn = orn.substring(0, orn.length-1);
 	            self["@simple-number-mask-value"] = orn;
-	          } else {
+	        } else if(event.charCode > 57 || event.charCode < 48) {
 	            return false;
-	          }
-
 	        }
 
 	        var conf = self["@simple-number-mask"];
@@ -108,7 +106,7 @@ var $simpleNumberMask = (function(){
 	        var output = "";
 
 	        if(event.keyCode != 8) {
-	          var ch = String.fromCharCode(event.keyCode);
+	          var ch = String.fromCharCode(event.charCode);
 	          origin += ch;
 	        }
 
@@ -154,7 +152,27 @@ var $simpleNumberMask = (function(){
         return false;
       }
 
-      item.onkeydown = function(self){
+      item.onkeydown = function(event){
+
+					if(event.keyCode == 86 && event.ctrlKey) {
+						//formatValue(this, config)
+						console.log(event);
+					  return true;
+					}
+
+				  if(event.keyCode==8) {
+				    return processKey(this, event);
+				  } else {
+				     return true;
+				  }
+      }
+
+			item.onpaste = function(event){
+          this.setSelectionRange(this.value.length,this.value.length);
+          return false;
+      };
+
+      item.onkeypress = function(self){
         return function(event){
           this.setSelectionRange(this.value.length,this.value.length);
           return processKey(self, event);
@@ -228,4 +246,3 @@ var $simpleNumberMask = (function(){
 
   return init();
 })();
-

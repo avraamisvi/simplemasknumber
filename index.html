@@ -17,11 +17,18 @@
           function shownumber() {
             alert($simpleNumberMask.getNumber("myinput"));
           }
+
+          function logar(event) {
+            console.log(event);
+          }
+	
         </script>
 
     </head>
     <body onload="load();">
-        <input type="text" id="myinput" class="simple-input">
+        <input type="text" id="myinput"  class="simple-input">
+		<input type="text" id="myinput2" class="simple-input">
+		<input type="text" id="myinput3" class="simple-input">
 
         <button onclick="showvalue()">show value</button>
         <button onclick="shownumber()">show number</button>
