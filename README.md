@@ -1,6 +1,6 @@
 ## A simple input mask for decimal numbers
 
-  A was tired of trying to find some *SIMPLE* input mask for the systems that I develop.
+  I was tired of trying to find some *SIMPLE* input mask for the systems I develop.
   So I decided to make my own input mask.
 
   The idea here is to be simple, so do not expect a lot of configuration options.
