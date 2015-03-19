@@ -9,7 +9,26 @@
 var $simpleNumberMask = (function() {
 
 	function init() {
-
+		
+		function parseValue(value, config) {
+			var parsed = value.replace(/\D/gi, "|").split("|");
+			var result = "";
+			
+			var intval = parseInt(parsed[0]);
+			
+			if(parsed[1].length < config.decimal.size) {
+				parsed[1] += "0";
+			}
+			
+			if(intval > 0) {
+				result = parsed[0];
+			}
+			
+			result += parsed[1];
+			
+			return result;
+		}
+		
 		function formatValue(item, config) {
 
 			if (!config) {
@@ -24,15 +43,23 @@ var $simpleNumberMask = (function() {
 					}
 				};
 			}
-
-			var origin = origin = item.value.replace(/\D/gi, "");
+			
+			item["@simple-number-mask-value"] = "";
+			var origin = origin = parseValue(item.value, config);
 			var output = "";
 
 			if (!origin) {
 				origin = "";
 			}
 
-			item["@simple-number-mask-value"] = origin;
+			try {
+				
+				if(parseInt(origin))				
+					item["@simple-number-mask-value"] = origin;
+			
+			} catch(ex) {
+				console.debug(ex)
+			}
 
 			var origintmp = origin;
 			var integr = 0;
@@ -127,9 +154,16 @@ var $simpleNumberMask = (function() {
 					var ch = String.fromCharCode(event.charCode);
 					origin += ch;
 				}
-
-				self["@simple-number-mask-value"] = origin;
-
+				
+				try {
+					
+					if(parseInt(origin))				
+						self["@simple-number-mask-value"] = origin;
+				
+				} catch(ex) {
+					console.debug(ex)
+				}
+				
 				var origintmp = origin;
 				var integr = 0;
 
@@ -185,7 +219,7 @@ var $simpleNumberMask = (function() {
 				}
 			}
 
-			item.onpaste = function(event) {//TODO
+			item.onpaste = function(event) {//TODO 
 //				this.setSelectionRange(this.value.length, this.value.length);
 				return false;
 			};
@@ -261,3 +295,4 @@ var $simpleNumberMask = (function() {
 
 	return init();
 })();
+
