@@ -11,22 +11,24 @@ var $simpleNumberMask = (function() {
 	function init() {
 
 		function parseValue(value, config) {
-			var parsed = value.replace(/\D/gi, "|").split("|");
-			var result = "";
+					var parsed = value.replace(/\D/gi, "|").split("|");
+					var result = "";
 
-			var intval = parseInt(parsed[0]);
+					if(parsed && parsed.length > 1) {
+						var intval = parseInt(parsed[0]);
 
-			while(parsed[1].length < config.decimal.size) {
-				parsed[1] += "0";
-			}
+						while(parsed[1].length < config.decimal.size) {
+							parsed[1] += "0";
+						}
 
-			if(intval > 0) {
-				result = parsed[0];
-			}
+						if(intval > 0) {
+							result = parsed[0];
+						}
 
-			result += parsed[1];
+						result += parsed[1];
+					}
 
-			return result;
+					return result;
 		}
 
 		function formatValue(item, config) {
